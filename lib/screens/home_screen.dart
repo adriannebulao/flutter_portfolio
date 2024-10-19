@@ -47,9 +47,13 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: [
               Container(
-                padding: const EdgeInsets.fromLTRB(400, 50, 400, 90),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                padding: const EdgeInsets.fromLTRB(0, 45, 0, 90),
+                width: screenWidth * 0.58,
+                child: Wrap(
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  alignment: WrapAlignment.spaceBetween,
+                  spacing: 20,
+                  runSpacing: 10,
                   children: [
                     InkWell(
                       onTap: () async {
@@ -63,7 +67,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             fontSize: 22),
                       ),
                     ),
-                    Row(
+                    Wrap(
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      spacing: 25,
+                      runSpacing: 10,
                       children: [
                         InkWell(
                           onTap: () {
@@ -71,14 +78,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           },
                           child: Text(
                             "projects",
+                            textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: const Color(0xffBDBDDD),
                                 fontSize: topBarFontSize,
                                 fontWeight: FontWeight.w400),
                           ),
-                        ),
-                        const SizedBox(
-                          width: 25,
                         ),
                         InkWell(
                           onTap: () {
@@ -86,14 +91,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           },
                           child: Text(
                             "skills",
+                            textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: const Color(0xffBDBDDD),
                                 fontSize: topBarFontSize,
                                 fontWeight: FontWeight.w400),
                           ),
-                        ),
-                        const SizedBox(
-                          width: 25,
                         ),
                         InkWell(
                           onTap: () {
@@ -101,25 +104,20 @@ class _HomeScreenState extends State<HomeScreen> {
                           },
                           child: Text(
                             "contact",
+                            textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: const Color(0xffBDBDDD),
                                 fontSize: topBarFontSize,
                                 fontWeight: FontWeight.w400),
                           ),
                         ),
-                        const SizedBox(
-                          width: 25,
-                        ),
-                        TextButton(
+                        IconButton(
                           onPressed: () {},
-                          style: ButtonStyle(
-                            overlayColor:
-                                WidgetStateProperty.all(Colors.transparent),
-                          ),
-                          child: const Icon(
+                          padding: EdgeInsets.zero,
+                          icon: const Icon(
                             Icons.wb_sunny,
                             color: Color(0xffBDBDDD),
-                            size: 25,
+                            size: 24,
                           ),
                         )
                       ],
@@ -129,11 +127,13 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Column(
                 children: [
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  const Wrap(
+                    spacing: 10,
+                    alignment: WrapAlignment.center,
                     children: [
                       Text(
                         "Hi, I am ",
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                             color: Color(0xffCDCDFF),
                             fontSize: 60,
@@ -141,6 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       Text(
                         "Adrianne Bulao.",
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                             color: Color(0xff90A0D9),
                             fontSize: 60,
@@ -238,8 +239,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   SizedBox(
                     height: 30,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  Wrap(
+                    runSpacing: 20,
+                    alignment: WrapAlignment.center,
                     children: [
                       ProjectCard(
                           title: "Uniqclear Desktop Application",
