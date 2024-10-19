@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_portfolio/widgets/project_card.dart';
 import 'package:flutter_portfolio/widgets/skill_card.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_portfolio/utils/methods.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -15,6 +14,20 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    final ScrollController _scrollController = ScrollController();
+    final GlobalKey _projectsKey = GlobalKey();
+    final GlobalKey _skillsKey = GlobalKey();
+    final GlobalKey _contactKey = GlobalKey();
+
+    void scrollToSection(GlobalKey key) {
+      final context = key.currentContext;
+      if (context != null) {
+        Scrollable.ensureVisible(context,
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.easeInOut);
+      }
+    }
+
     double screenWidth = MediaQuery.sizeOf(context).width;
 
     double topBarFontSize = 16;
@@ -52,32 +65,47 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     Row(
                       children: [
-                        Text(
-                          "projects",
-                          style: TextStyle(
-                              color: const Color(0xffBDBDDD),
-                              fontSize: topBarFontSize,
-                              fontWeight: FontWeight.w400),
+                        InkWell(
+                          onTap: () {
+                            scrollToSection(_projectsKey);
+                          },
+                          child: Text(
+                            "projects",
+                            style: TextStyle(
+                                color: const Color(0xffBDBDDD),
+                                fontSize: topBarFontSize,
+                                fontWeight: FontWeight.w400),
+                          ),
                         ),
                         const SizedBox(
                           width: 25,
                         ),
-                        Text(
-                          "skills",
-                          style: TextStyle(
-                              color: const Color(0xffBDBDDD),
-                              fontSize: topBarFontSize,
-                              fontWeight: FontWeight.w400),
+                        InkWell(
+                          onTap: () {
+                            scrollToSection(_skillsKey);
+                          },
+                          child: Text(
+                            "skills",
+                            style: TextStyle(
+                                color: const Color(0xffBDBDDD),
+                                fontSize: topBarFontSize,
+                                fontWeight: FontWeight.w400),
+                          ),
                         ),
                         const SizedBox(
                           width: 25,
                         ),
-                        Text(
-                          "contact",
-                          style: TextStyle(
-                              color: const Color(0xffBDBDDD),
-                              fontSize: topBarFontSize,
-                              fontWeight: FontWeight.w400),
+                        InkWell(
+                          onTap: () {
+                            scrollToSection(_contactKey);
+                          },
+                          child: Text(
+                            "contact",
+                            style: TextStyle(
+                                color: const Color(0xffBDBDDD),
+                                fontSize: topBarFontSize,
+                                fontWeight: FontWeight.w400),
+                          ),
                         ),
                         const SizedBox(
                           width: 25,
@@ -194,8 +222,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   )
                 ],
               ),
-              const Column(
-                children: [
+              Column(
+                key: _projectsKey,
+                children: const [
                   SizedBox(
                     height: 75,
                   ),
@@ -251,6 +280,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 75,
               ),
               Column(
+                key: _skillsKey,
                 children: [
                   const Text(
                     "SKILLS",
@@ -292,6 +322,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 75,
               ),
               Column(
+                key: _contactKey,
                 children: [
                   const Text(
                     "CONTACT",
