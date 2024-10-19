@@ -336,6 +336,25 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SizedBox(
                     height: 30,
                   ),
+                  Container(
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.2),
+                          spreadRadius: 2,
+                          blurRadius: 30,
+                          offset: const Offset(0, 9),
+                        ),
+                      ],
+                    ),
+                    height: 200,
+                    width: 200,
+                    child: const Image(
+                        image: AssetImage('assets/images/adriannebulao.png')),
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
                   OutlinedButton(
                       onPressed: () {},
                       style: OutlinedButton.styleFrom(
