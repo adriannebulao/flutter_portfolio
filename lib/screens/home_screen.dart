@@ -2,15 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_portfolio/widgets/project_card.dart';
 import 'package:flutter_portfolio/widgets/skill_card.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_portfolio/utils/methods.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.sizeOf(context).width;
 
     double topBarFontSize = 16;
+    const description =
+        "A student backend developer with experience in developing desktop and web applications using Java and Python. Skilled in designing and managing databases with MySQL and PostgreSQL, and building RESTful APIs. Proficient in a wide range of technologies, including JavaScript, TypeScript, and frameworks like NestJS, React, and Prisma.";
+    const resumeLink =
+        "https://drive.usercontent.google.com/download?id=1eAGQYCYeX1EAUfqQXHrgjD1f1JHSvR6-&export=download&authuser=1&confirm=t&uuid=44277e16-d1d7-4178-af12-f53d09dad674&at=AN_67v30qo_09wFui2s58hsQ6T7x:1729334205509";
+    const githubLink = "https://github.com/adriannebulao";
+    const linkedinLink = "https://www.linkedin.com/in/adriannebulao";
+    const portfolioRepoLink =
+        "https://github.com/adriannebulao/flutter_portfolio";
 
     return Scaffold(
         body: SingleChildScrollView(
@@ -23,12 +38,17 @@ class HomeScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      "AB.",
-                      style: TextStyle(
-                          color: Color(0xff90A0D9),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 22),
+                    InkWell(
+                      onTap: () async {
+                        Methods().goToWebpage(portfolioRepoLink);
+                      },
+                      child: const Text(
+                        "AB.",
+                        style: TextStyle(
+                            color: Color(0xff90A0D9),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 22),
+                      ),
                     ),
                     Row(
                       children: [
@@ -116,7 +136,7 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(
                     width: screenWidth * .322,
                     child: const Text(
-                      "Adipisicing sit fugit ullam unde aliquid sequi Facilis soluta facilis perspiciatis corporis nulla aspernatur. Autem eligendi rerum delectus modi quisquam? Illo ut quasi nemo ipsa cumque perspiciatis! Maiores minima consectetur.",
+                      description,
                       style: TextStyle(
                         color: Color(0xffBDBDDD),
                         fontSize: 16,
@@ -130,7 +150,9 @@ class HomeScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       OutlinedButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            await Methods().goToWebpage(resumeLink);
+                          },
                           style: OutlinedButton.styleFrom(
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(0)),
@@ -147,21 +169,27 @@ class HomeScreen extends StatelessWidget {
                             ),
                           )),
                       const SizedBox(
-                        width: 15,
+                        width: 10,
                       ),
-                      const FaIcon(
-                        FontAwesomeIcons.github,
-                        color: Color(0xffBDBDDD),
-                        size: 25,
+                      IconButton(
+                        onPressed: () async {
+                          await Methods().goToWebpage(githubLink);
+                        },
+                        icon: const FaIcon(
+                          FontAwesomeIcons.github,
+                          color: Color(0xffBDBDDD),
+                          size: 25,
+                        ),
                       ),
-                      const SizedBox(
-                        width: 15,
-                      ),
-                      const FaIcon(
-                        FontAwesomeIcons.linkedin,
-                        color: Color(0xffBDBDDD),
-                        size: 20,
-                      )
+                      IconButton(
+                          onPressed: () async {
+                            await Methods().goToWebpage(linkedinLink);
+                          },
+                          icon: const FaIcon(
+                            FontAwesomeIcons.linkedin,
+                            color: Color(0xffBDBDDD),
+                            size: 20,
+                          )),
                     ],
                   )
                 ],
@@ -185,10 +213,10 @@ class HomeScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       ProjectCard(
-                          title: "Project 1",
+                          title: "Uniqclear Desktop Application",
                           description:
-                              "Amet asperiores et impedit aliquam consectetur? Voluptates sed a nulla ipsa officia et esse aliquam",
-                          technologies: "SASS   Typescript   React",
+                              "Integrated business management system developed using Java with MySQL database for Software Engineering course.",
+                          technologies: "Java   MySQL",
                           githubLink:
                               "https://github.com/RonBers/Legacy-Uniqclear-App",
                           link:
@@ -197,20 +225,20 @@ class HomeScreen extends StatelessWidget {
                         width: 30,
                       ),
                       ProjectCard(
-                          title: "Project 2",
+                          title: "QuicKeys Ecommerce Web Application",
                           description:
-                              "Amet asperiores et impedit aliquam consectetur? Voluptates sed a nulla ipsa officia et esse aliquam",
-                          technologies: "SASS   Typescript   React",
+                              "Web application developed using React and Django with PostgreSQL database for Full-Stack Web Development course.",
+                          technologies: "React   Django   PostgreSQL",
                           githubLink: "https://github.com/QuicKeys/quickeys",
                           link: "https://github.com/QuicKeys/quickeys"),
                       SizedBox(
                         width: 30,
                       ),
                       ProjectCard(
-                          title: "Project 3",
+                          title: "SAMAHAN Website Backend",
                           description:
-                              "Amet asperiores et impedit aliquam consectetur? Voluptates sed a nulla ipsa officia et esse aliquam",
-                          technologies: "SASS   Typescript   React",
+                              "Backend for SAMAHAN Website project developed using NestJS, Prisma, and Supabase with PostgreSQL database.",
+                          technologies: "NestJS   Prisma  Supabase",
                           githubLink:
                               "https://github.com/SAMAHAN-Systems-Development/samahan-all-for-more-backend",
                           link:
@@ -235,25 +263,25 @@ class HomeScreen extends StatelessWidget {
                     height: 30,
                   ),
                   SizedBox(
-                    width: screenWidth * .22,
+                    width: screenWidth * .24,
                     child: const Center(
                       child: Wrap(
                         alignment: WrapAlignment.center,
                         spacing: 15,
                         runSpacing: 15,
                         children: [
-                          SkillCard(skill: "HTML"),
-                          SkillCard(skill: "CSS"),
+                          SkillCard(skill: "Java"),
+                          SkillCard(skill: "Python"),
                           SkillCard(skill: "JavaScript"),
-                          SkillCard(skill: "TypeScript"),
                           SkillCard(skill: "React"),
-                          SkillCard(skill: "Redux"),
-                          SkillCard(skill: "SASS"),
-                          SkillCard(skill: "Material UI"),
+                          SkillCard(skill: "Django"),
+                          SkillCard(skill: "NestJS"),
+                          SkillCard(skill: "MySQL"),
+                          SkillCard(skill: "PostgreSQL"),
+                          SkillCard(skill: "Prisma"),
+                          SkillCard(skill: "Supabase"),
                           SkillCard(skill: "Git"),
-                          SkillCard(skill: "CI/CD"),
-                          SkillCard(skill: "Jest"),
-                          SkillCard(skill: "Enzyme"),
+                          SkillCard(skill: "Postman"),
                         ],
                       ),
                     ),
@@ -285,23 +313,35 @@ class HomeScreen extends StatelessWidget {
                             color: Color(0xff90A0D9),
                           ),
                           padding: const EdgeInsets.all(20)),
-                      child: const Text(
-                        "email me",
-                        style: TextStyle(
-                          color: Color(0xff90A0D9),
-                          fontSize: 16,
+                      child: InkWell(
+                        onTap: () async {
+                          await Methods()
+                              .goToWebpage("mailto:amcbulao@gmail.com");
+                        },
+                        child: const Text(
+                          "email me",
+                          style: TextStyle(
+                            color: Color(0xff90A0D9),
+                            fontSize: 16,
+                          ),
                         ),
                       )),
                 ],
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 100, 0, 50),
-                child: const Text(
-                  "Created By Adrianne Bulao",
-                  style: TextStyle(
-                      color: Color(0xff90A0D9),
-                      fontSize: 14,
-                      fontWeight: FontWeight.w800),
+                child: InkWell(
+                  onTap: () async {
+                    await Methods().goToWebpage(
+                        "https://github.com/adriannebulao/flutter_portfolio");
+                  },
+                  child: const Text(
+                    "Created By Adrianne Bulao",
+                    style: TextStyle(
+                        color: Color(0xff90A0D9),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w800),
+                  ),
                 ),
               )
             ],
